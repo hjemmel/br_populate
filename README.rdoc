@@ -1,14 +1,16 @@
 == Código Rails para Popular cidades e estados do Brasil
 
-É um código simples mas chato de se fazer. O que eu fiz foi só organizar um código (pra ser usado em um seed do Rails) pra popular as tabelas Estado e Cidades.
+Código simples mas que toma muito tempo para se fazer. Nosso objetivo foi organizar o código (pra ser usado em um seed do Rails) usado para popular as tabelas Estados e Cidades.
 
-Quem achar algum erro de português ou cidade faltando, por favor me sinalize para que outras pessoas possam ter acesso ao arquivo corrigido.
+Se encontrar algum erro de português ou cidade faltando, por favor, sinalize para que outras pessoas possam ter acesso ao arquivo corrigido.
 
 == Uso
 
-Simplismente copie o conteúdo do arquivo "br_populate.rb" e cole no Seed.rb (ou em outro arquivo) de sua aplicação. Uma outra sugestão é incluir em um arquivo Thor na pasta /lib/tasks do seu projeto Rails.
+Copie o conteúdo do arquivo "br_populate.rb” para o seu Seed.rb (ou em outro arquivo) de sua aplicação. 
 
-Eu estou usando as tabelas de Cidade e Estado com a seguinte estrutura:
+Uma outra sugestão é incluir em um arquivo Thor na pasta /lib/tasks do seu projeto Rails.
+
+As tabelas de Cidade e Estado seguem a seguinte estrutura:
   ________________                    __________________
  |     States     |                  |      Cities      |
  |----------------| 1 ------------ * |------------------|
@@ -17,8 +19,7 @@ Eu estou usando as tabelas de Cidade e Estado com a seguinte estrutura:
   ----------------                   | state_id:integer |
                                       ------------------
 
-O loop de inserção das cidades está bem curtinho, então caso sua estrutura seja diferente da minha, é fácil alterar.
-
+O loop de inserção das cidades é bem pequeno, então se a sua estrutura é diferente, esta alteração é bem simples.
 
     states.each do |state|
       state_obj = State.new(:acronym => state["acronym"], :name => state["name"])
@@ -36,4 +37,4 @@ O loop de inserção das cidades está bem curtinho, então caso sua estrutura s
 
 == Referências
 
-Eu achei a lista das cidade desse arquivo .js: "http://cidades-estados-js.googlecode.com/files/cidades-estados-v0.2.js" escrito po DGmike do site http://dgmike.com.br/
+Lista das cidade arquivo .js: "http://cidades-estados-js.googlecode.com/files/cidades-estados-v0.2.js" escrito po DGmike do site http://dgmike.com.br/
