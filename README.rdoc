@@ -6,7 +6,7 @@ Se encontrar algum erro de português ou cidade faltando, por favor, sinalize pa
 
 == Uso
 
-Copie o conteúdo do arquivo "br_populate.rb” para o seu Seed.rb (ou em outro arquivo) de sua aplicação. 
+Copie o conteúdo do arquivo "br_populate.rb” para o seu Seed.rb (ou em outro arquivo) de sua aplicação.
 
 Uma outra sugestão é incluir em um arquivo Thor na pasta /lib/tasks do seu projeto Rails.
 
@@ -16,23 +16,16 @@ As tabelas de Cidade e Estado seguem a seguinte estrutura:
  |----------------| 1 ------------ * |------------------|
  | name:string    |                  | name:string      |
  | acronym:string |                  | capital:boolean  |
+ | code:integer   |                  | code:integer     |
   ----------------                   | state_id:integer |
                                       ------------------
 
 O loop de inserção das cidades é bem pequeno, então se a sua estrutura é diferente, esta alteração é bem simples.
 
     states.each do |state|
-      state_obj = State.new(:acronym => state["acronym"], :name => state["name"])
-      state_obj.save
-      
-      state["cities"].each do |city|
-        c = City.new
-        c.name = city
-        c.state = state_obj
-        c.capital = capital?(city, state)
-        c.save
-      end
-    end
+      state_obj = State.find_or_create_by(acronym: state["acronym"], name: state["name"], code: state['code'])
+
+      state["cities"].each { |city| City.find_or_create_by(name: city['name'], state: state_obj, code: city['code'], capital: capital?(city, state)) }
 
 
 == Referências
