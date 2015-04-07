@@ -23,9 +23,10 @@ As tabelas de Cidade e Estado seguem a seguinte estrutura:
 O loop de inserção das cidades é bem pequeno, então se a sua estrutura é diferente, esta alteração é bem simples.
 
     states.each do |state|
-      state_obj = State.find_or_create_by(acronym: state["acronym"], name: state["name"], code: state['code'])
+        state_obj = State.find_or_create_by(acronym: state["acronym"], name: state["name"], code: state['code'])
 
-      state["cities"].each { |city| City.find_or_create_by(name: city['name'], state: state_obj, code: city['code'], capital: capital?(city, state)) }
+        state["cities"].each { |city| City.find_or_create_by(name: city['name'], state: state_obj, code: city['code'], capital: capital?(city, state)) }
+      end
 
 
 == Referências
